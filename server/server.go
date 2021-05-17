@@ -11,15 +11,17 @@ import (
 )
 
 const (
-	ConnHost = "IP"
+	ConnHost = "IP_ADDR"
 	ConnPort = "4444"
 	ConnType = "tcp"
 )
-type reqStructure struct{
+
+type reqStructure struct {
 	DownloadName string
-	ReqAuthor string
-	Priority int //number 1-5
+	ReqAuthor    string
+	Priority     int //number 1-5
 }
+
 func main() {
 	// Listen for incoming connections.
 	l, err := net.Listen(ConnType, ConnHost+":"+ConnPort)
@@ -66,7 +68,7 @@ func handleRequest(conn net.Conn) {
 	_ = conn.Close()
 }
 
-func readDownloadRequest(clientReq []byte) {//*bytes.Buffer
+func readDownloadRequest(clientReq []byte) { //*bytes.Buffer
 	//var reqArray []byte
 	file, _ := os.OpenFile("**PATH**", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 
@@ -80,7 +82,6 @@ func readDownloadRequest(clientReq []byte) {//*bytes.Buffer
 	firstCsvLine := []string{"Author", "Download Name", "Priority"}
 	_ = writer.Write(firstCsvLine)
 
-
 	fmt.Printf("%v\n", clientReq)
 
 	dec := gob.NewDecoder(bytes.NewBuffer(clientReq))
@@ -88,10 +89,10 @@ func readDownloadRequest(clientReq []byte) {//*bytes.Buffer
 	if err := dec.Decode(&reqArray); err != nil {
 		fmt.Println(err)
 	}
-	for i, singleReq := range reqArray{
+	for i, singleReq := range reqArray {
 		author, downloadName, priority := singleReq.ReqAuthor, singleReq.DownloadName, singleReq.Priority
-		lineToAdd := []string{author,downloadName, strconv.FormatInt(int64(priority), 10)}
-		fmt.Printf("Request %d: %v, %v, %d\n",i, author, downloadName, priority)
+		lineToAdd := []string{author, downloadName, strconv.FormatInt(int64(priority), 10)}
+		fmt.Printf("Request %d: %v, %v, %d\n", i, author, downloadName, priority)
 		fmt.Println(lineToAdd)
 		_ = writer.Write(lineToAdd)
 	}
