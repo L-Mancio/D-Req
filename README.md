@@ -15,6 +15,7 @@ Two options to run:
 3. Follow client.go prompt
 
 =========================
+
 1. Create two executables and run from cmd
 2. go executables are created with command go build *file*.go
 
