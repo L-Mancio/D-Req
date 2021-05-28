@@ -10,12 +10,15 @@ import (
 	"strconv"
 	"strings"
 )
-type reqStructure struct{
+
+type reqStructure struct {
 	DownloadName string
-	ReqAuthor string
-	Priority int //number 1-5
+	ReqAuthor    string
+	Priority     int //number 1-5
 }
+
 func main() {
+
 	fmt.Println("Enter your name:")
 	reader := bufio.NewReader(os.Stdin)
 	name, _ := reader.ReadString('\n')
@@ -23,8 +26,8 @@ func main() {
 
 	var reqArray []reqStructure
 
-	if name!= ""{
-		for  {
+	if name != "" {
+		for {
 			fmt.Println("Enter Download name, be specific")
 			reader := bufio.NewReader(os.Stdin)
 			dwnldName, _ := reader.ReadString('\n')
@@ -40,9 +43,9 @@ func main() {
 			reqArray = append(reqArray, reqStructure{
 				DownloadName: dwnldName,
 				ReqAuthor:    name,
-				Priority: int(prioInt),
+				Priority:     int(prioInt),
 			})
-			if strings.ToLower(resp) == "y"{
+			if strings.ToLower(resp) == "y" {
 				break
 			}
 		}
@@ -55,7 +58,7 @@ func main() {
 
 	requestInByteFormat := buf.Bytes()
 
-	servAddr := "IP:4444"
+	servAddr := "192.168.1.106:4444"
 	tcpAddr, err := net.ResolveTCPAddr("tcp", servAddr)
 	if err != nil {
 		println("ResolveTCPAddr failed:", err.Error())

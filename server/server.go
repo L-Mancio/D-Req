@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	ConnHost = "IP_ADDR"
+	ConnHost = "192.168.1.51"
 	ConnPort = "4444"
 	ConnType = "tcp"
 )
@@ -70,7 +70,7 @@ func handleRequest(conn net.Conn) {
 
 func readDownloadRequest(clientReq []byte) { //*bytes.Buffer
 	//var reqArray []byte
-	file, _ := os.OpenFile("**PATH**", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	file, _ := os.OpenFile("C:\\Users\\lucam\\Desktop\\D-Req\\requests.csv", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 
 	//handles file closure
 	defer func(file *os.File) {
@@ -79,10 +79,14 @@ func readDownloadRequest(clientReq []byte) { //*bytes.Buffer
 
 	writer := csv.NewWriter(file)
 	defer writer.Flush()
-	firstCsvLine := []string{"Author", "Download Name", "Priority"}
-	_ = writer.Write(firstCsvLine)
+	rows, _ := csv.NewReader(file).Read()
 
-	fmt.Printf("%v\n", clientReq)
+	if rows == nil {
+
+		firstCsvLine := []string{"Author", "Download Name", "Priority"}
+		_ = writer.Write(firstCsvLine)
+	}
+	//fmt.Printf("%v\n", clientReq)
 
 	dec := gob.NewDecoder(bytes.NewBuffer(clientReq))
 	var reqArray []reqStructure
