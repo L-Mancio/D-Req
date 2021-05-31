@@ -21,6 +21,6 @@ Two options to run:
 3. Then just file.exe on cmd (server doesn't have a gui)
 
 Next Possible Steps:
-    1. ~~Create a dumbed down GUI for this~~
-    2. Create Gui for Server
-    3. Make server send reply when download is completed
+1. ~~Create a dumbed down GUI for this~~
+2. Create Gui for Server
+3. Make server send reply when download is completed
