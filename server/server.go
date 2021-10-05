@@ -70,7 +70,7 @@ func handleRequest(conn net.Conn) {
 
 func readDownloadRequest(clientReq []byte) { //*bytes.Buffer
 	//var reqArray []byte
-	file, _ := os.OpenFile("C:\\Users\\lucam\\Desktop\\D-Req\\requests.csv", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	file, _ := os.OpenFile("PATH\\requests.csv", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 
 	//handles file closure
 	defer func(file *os.File) {
